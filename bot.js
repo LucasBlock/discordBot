@@ -22,10 +22,9 @@ client.on('message', async msg => {
     if (!msg.content.startsWith(prefix)) return;
 
     // if === !audio ou !audio --help ou --commands
-    if(msg.content === "!audio" || msg.content === "!audio --help" || msg.content === "!audio --commands"){
-        msg.channel.send("Para ver a lista de audios digite '!audio --lista', para reproduzir algum audio digite !audio NomeDoAudio");
-        return;
-    }
+    if(msg.content === "!audio" || msg.content === "!audio --help" || msg.content === "!audio --commands")
+        return msg.channel.send("Para ver a lista de audios digite '!audio --lista', para reproduzir algum audio digite !audio NomeDoAudio");
+        
 
     const args = msg.content.split(" ");
 
@@ -50,8 +49,7 @@ client.on('message', async msg => {
             // The check succeeded
         } catch (error) {
             // The check failed
-            msg.channel.send("Nenhum arquivo de audio coincide com esse comando"); 
-            return;
+            return msg.channel.send("Nenhum arquivo de audio coincide com esse comando"); 
         }
     }
     // Only try to join the sender's voice channel if they are in one themselves
@@ -59,7 +57,7 @@ client.on('message', async msg => {
         const connection = await msg.member.voice.channel.join();
         const dispatcher = connection.play(`${path}teste.mp3`);
     } else {
-        msg.reply('Você precisa estar em um canal de voz primeiramente, meu anjo!');
+        return msg.reply('Você precisa estar em um canal de voz primeiramente, meu anjo!');
     }
 
     // If has the right permisssions
