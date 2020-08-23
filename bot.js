@@ -55,7 +55,7 @@ client.on('message', async msg => {
     // Only try to join the sender's voice channel if they are in one themselves
     if (msg.member.voice.channel) {
         const connection = await msg.member.voice.channel.join();
-        const dispatcher = connection.play(`${path}teste.mp3`);
+        const dispatcher = connection.play(`${path}${args[1]}.mp3`);
     } else {
         return msg.reply('Você precisa estar em um canal de voz primeiramente, meu anjo!');
     }
